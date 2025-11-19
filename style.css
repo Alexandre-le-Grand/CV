@@ -1,0 +1,604 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+:root {
+    --main-color: #0056b3; /* Couleur par défaut */
+    --main-font: 'Helvetica', sans-serif; /* Police par défaut pour le CV */
+    --ui-font: 'Poppins', sans-serif; /* Police pour l'interface */
+}
+
+body {
+    /* La police du body n'affecte que l'interface, pas le CV */
+    font-family: 'Helvetica', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    display: flex;
+    max-width: 1200px;
+    margin: 20px auto;
+    gap: 20px;
+}
+
+.form-section, .preview-section {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.form-section {
+    flex: 1;
+}
+
+.preview-section {
+    flex: 1;
+    /* Ajout pour que l'aperçu ne grandisse pas indéfiniment */
+    display: flex;
+    flex-direction: column;
+    background-color: #e9e9f2; /* Fond pour contraster avec la page blanche */
+    padding: 20px;
+    overflow: hidden;
+}
+
+input[type="text"], textarea, select {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    box-sizing: border-box; /* Important pour que le padding n'ajoute pas à la largeur */
+}
+
+input[type="file"] {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.form-row {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+button, .export-button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover, .export-button:hover {
+    background-color: #0056b3;
+}
+
+button[type="button"] {
+    background-color: #6c757d;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+button[type="button"]:hover {
+    background-color: #5a6268;
+}
+
+.entry {
+    background: #f9f9f9;
+    border: 1px solid #eee;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    position: relative;
+}
+
+.delete-entry {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: #ff4d4d;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    cursor: pointer;
+    font-weight: bold;
+    padding: 0;
+}
+.delete-entry:hover {
+    background: #cc0000;
+}
+
+.skill-group-entry {
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    background: #fafafa;
+}
+
+.skill-group-entry > input {
+    font-weight: bold;
+    font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+.skill-entry-item {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.skill-entry-item input[type="range"] {
+    max-width: 150px;
+}
+
+/* Styles pour l'aperçu du CV */
+#cv-preview {
+    /* Simule une page A4 */
+    width: 210mm;
+    min-height: 297mm; /* La hauteur peut grandir pour la capture PDF */
+    margin: 0 auto; /* Centre la page */
+
+    display: flex;
+    font-family: var(--main-font);
+    background: white;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    border: none;
+    padding: 0; /* Le padding sera géré par les colonnes */
+}
+
+.cv-sidebar {
+    width: 35%;
+    background-color: #f2f2f2;
+    padding: 30px;
+    color: #333;
+}
+
+.cv-sidebar h2 {
+    color: var(--main-color);
+    font-size: 1.2em;
+    border-bottom: 2px solid var(--main-color);
+    padding-bottom: 5px;
+    margin-top: 20px;
+}
+
+.profile-pic-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#preview-profile-pic {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--main-color);
+}
+
+.cv-main {
+    width: 65%;
+    padding: 40px 30px;
+}
+
+.main-header h1 {
+    font-size: 2.8em;
+    margin: 0;
+    font-weight: bold;
+    color: #333;
+}
+
+.main-header p {
+    font-size: 1.5em;
+    margin: 0;
+    color: var(--main-color);
+    font-weight: 300;
+}
+
+.main-section {
+    margin-top: 30px;
+}
+
+.main-section h2 {
+    color: var(--main-color);
+    font-size: 1.4em;
+    border-bottom: 2px solid var(--main-color);
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+}
+
+.cv-entry {
+    margin-bottom: 15px;
+}
+.cv-entry h3 { margin: 0; font-size: 1.1em; }
+.cv-entry .date { font-style: italic; color: #555; font-size: 0.9em; margin-bottom: 5px; }
+.cv-entry .description { margin-top: 5px; font-size: 0.95em; }
+
+.contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+}
+
+.contact-item i {
+    color: var(--main-color);
+    width: 20px;
+    text-align: center;
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+
+.skill-entry {
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+.skill-name {
+    margin-bottom: 4px;
+    font-weight: 500;
+}
+
+.skill-stars {
+    color: var(--main-color);
+    font-size: 1.1em;
+}
+
+.skill-stars .fa-star {
+    margin-right: 2px;
+}
+
+.skill-stars .empty {
+    color: #ccc;
+}
+
+.skill-group-preview {
+    margin-bottom: 15px;
+}
+.skill-group-preview h4 {
+    margin: 0 0 8px 0;
+    color: #333; /* Changé pour une couleur foncée et lisible */
+    font-weight: 700;
+    font-size: 1.5em; /* Légèrement plus grand que la police des compétences (0.9em) */
+}
+
+#preview-interests {
+    font-size: 0.9em;
+    line-height: 1.6;
+}
+
+#preview-interests ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+#preview-interests li {
+    position: relative;
+    padding-left: 1.2em; /* Espace pour la puce */
+    margin-bottom: 5px;
+}
+
+#preview-interests li::before {
+    content: '•'; /* La puce */
+    color: var(--main-color);
+    font-weight: bold;
+    display: inline-block;
+    position: absolute;
+    left: 0;
+}
+
+/* Conteneur scrollable pour l'aperçu */
+.preview-scroll-container {
+    overflow: auto;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background: #e9e9f2;
+    padding: 20px 0;
+}
+
+/* Styles pour l'écran de chargement */
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    /* Masqué par défaut, on le montrera avec JS */
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    z-index: 1000;
+    font-size: 1.2em;
+}
+
+.spinner {
+    border: 8px solid #f3f3f3; /* Gris clair */
+    border-top: 8px solid var(--main-color); /* Couleur d'accentuation */
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Classe pour afficher l'overlay */
+.loading {
+    display: flex;
+}
+
+/* Styles pour la page d'accueil (landing page) */
+.landing-page {
+    background: linear-gradient(45deg, #4e54c8, #8f94fb);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    color: white;
+    text-align: center;
+}
+
+.landing-container {
+    max-width: 800px;
+    padding: 20px;
+}
+
+.landing-title {
+    font-size: 3.5em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+}
+
+.landing-subtitle {
+    font-size: 1.3em;
+    margin-bottom: 2em;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.cta-container {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+.cta-button {
+    background-color: #ffffff;
+    color: #4e54c8;
+    padding: 15px 35px;
+    font-size: 1.2em;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 50px;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+    background-color: #f0f0f0;
+}
+
+.cta-button.secondary {
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+}
+
+.cta-button.secondary:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Styles pour l'aperçu de la lettre */
+#letter-preview {
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0 auto;
+    background: white;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    padding: 25mm;
+    box-sizing: border-box;
+    font-family: 'Garamond', serif; /* Police classique pour une lettre */
+    color: #333;
+    font-size: 12pt;
+    line-height: 1.5;
+    overflow-wrap: break-word; /* Force le retour à la ligne pour les mots longs */
+}
+
+.letter-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20mm;
+}
+
+#preview-letter-sender {
+    width: 45%;
+    min-width: 0; /* Empêche le bloc de s'étirer au-delà de sa largeur définie */
+}
+
+.letter-recipient-block {
+    width: 45%;
+    min-width: 0; /* Empêche le bloc de s'étirer au-delà de sa largeur définie */
+    text-align: right;
+}
+
+#preview-letter-recipient {
+    margin-bottom: 10mm;
+}
+
+#preview-letter-place-date {
+    margin-bottom: 10mm;
+}
+
+#preview-letter-subject {
+    font-weight: bold;
+    margin-bottom: 10mm;
+    text-align: left;
+}
+
+.letter-footer {
+    /* Positionne le bloc de signature à partir de 55% de la largeur de la page */
+    /* ce qui le place sur la moitié droite, sans être collé au bord. */
+    padding-left: 55%;
+    margin-top: 10mm;
+}
+
+/* =============================================== */
+/* NOUVEAUX STYLES - PAGE LETTRE DE MOTIVATION     */
+/* =============================================== */
+
+.letter-page-body {
+    background-color: #f8f9fa; /* Fond plus clair et moderne */
+    font-family: var(--ui-font);
+}
+
+.letter-editor-container {
+    max-width: 1100px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+.form-section-letter {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08); /* Ombre plus douce */
+    margin-bottom: 40px;
+}
+
+.form-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.form-header h1 {
+    font-weight: 600;
+    margin: 0;
+    color: #212529;
+}
+
+.back-to-home {
+    background-color: #6c757d;
+    color: white;
+    padding: 8px 15px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    transition: background-color 0.2s;
+}
+
+.back-to-home:hover {
+    background-color: #5a6268;
+}
+
+.letter-form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 30px;
+    grid-template-areas:
+        "sender recipient"
+        "details details"
+        "body body"
+        "closing closing";
+}
+
+.form-group h2 {
+    font-size: 1.1em;
+    font-weight: 500;
+    margin-top: 0;
+    color: #343a40;
+}
+
+.sender-group { grid-area: sender; }
+.recipient-group { grid-area: recipient; }
+.details-group { grid-area: details; }
+.body-group { grid-area: body; }
+.closing-group { grid-area: closing; }
+
+.preview-section-letter {
+    padding: 40px 20px;
+    background: transparent;
+}
+
+.preview-title {
+    text-align: center;
+    color: #555;
+    margin-bottom: 20px;
+    font-weight: 300;
+    font-size: 1.5em;
+}
+
+/* On réinitialise les styles de l'aperçu de la lettre pour la nouvelle structure */
+#letter-preview {
+    padding: 25mm;
+    font-family: 'Garamond', serif;
+    font-size: 12pt;
+    line-height: 1.5;
+    overflow-wrap: break-word;
+}
+
+#letter-preview .letter-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#letter-preview #preview-letter-recipient {
+    text-align: right;
+}
+
+#letter-preview #preview-letter-place-date {
+    text-align: right;
+    margin-top: 10mm;
+}
+
+#letter-preview #preview-letter-closing,
+#letter-preview #preview-letter-signature {
+    padding-left: 50%;
+    margin-top: 10mm;
+}
+
+/* Règle spécifique pour l'exportation PDF */
+/* Lorsque html2pdf clone l'élément, il l'entoure d'un conteneur avec cette classe */
+.html2pdf__container #cv-preview,
+.html2pdf__container #letter-preview {
+    /* Force la position en haut à gauche, ignorant les styles de la page */
+    position: absolute;
+    top: 0;
+    left: 0;
+}

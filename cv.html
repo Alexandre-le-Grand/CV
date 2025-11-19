@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Créateur de CV</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="letter-page-body">
+
+    <div class="letter-editor-container">
+        <div class="form-section-letter">
+            <div class="form-header">
+                <h1>Créateur de CV</h1>
+                <a href="index.html" class="back-to-home">Retour à l'accueil</a>
+            </div>
+
+            <div class="form-group">
+                <h2>Personnalisation</h2>
+                <div class="form-row">
+                    <div>
+                        <label for="template-select">Modèle de CV</label>
+                        <select id="template-select">
+                            <option value="template-sidebar">Moderne (2 colonnes)</option>
+                            <option value="template-classic">Classique (1 colonne)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="accent-color">Couleur d'accentuation</label>
+                        <input type="color" id="accent-color" value="#0056b3">
+                    </div>
+                    <div>
+                        <label for="font-select">Police d'écriture</label>
+                        <select id="font-select">
+                            <option value="'Helvetica', sans-serif">Helvetica</option>
+                            <option value="'Georgia', serif">Georgia</option>
+                            <option value="'Verdana', sans-serif">Verdana</option>
+                            <option value="'Garamond', serif">Garamond</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <form id="cv-form">
+                <div class="form-group">
+                    <h2>Informations Personnelles</h2>
+                    <label for="profile-pic">Photo de profil</label>
+                    <input type="file" id="profile-pic" accept="image/*">
+                    <input type="text" id="nom" placeholder="Nom complet" required>
+                    <input type="text" id="titre" placeholder="Titre (ex: Développeur Web)">
+                    <input type="email" id="contact-email" placeholder="Email">
+                    <input type="tel" id="contact-phone" placeholder="Téléphone">
+                    <input type="text" id="contact-address" placeholder="Adresse">
+                </div>
+                <div class="form-group">
+                    <h2>Expérience Professionnelle</h2>
+                    <div id="experience-entries"></div>
+                    <button type="button" id="add-experience">Ajouter une expérience</button>
+                </div>
+                <div class="form-group">
+                    <h2>Formation</h2>
+                    <div id="formation-entries"></div>
+                    <button type="button" id="add-formation">Ajouter une formation</button>
+                </div>
+                <div class="form-group">
+                    <h2>Compétences</h2>
+                    <div id="skill-groups-container"></div>
+                    <button type="button" id="add-skill-group">Ajouter un groupe de compétences</button>
+                </div>
+                <div class="form-group">
+                    <h2>Centres d'intérêt</h2>
+                    <textarea id="interests" placeholder="Ex: Randonnée, Photographie, Bénévolat... (un par ligne)"></textarea>
+                </div>
+            </form>
+            <button id="export-pdf" class="export-button">Exporter en PDF</button>
+        </div>
+
+        <div class="preview-section-letter">
+            <h2 class="preview-title">Aperçu en direct</h2>
+            <div id="cv-preview" class="template-sidebar">
+                <!-- Colonne latérale (gauche) -->
+                <div class="cv-sidebar">
+                    <div class="profile-pic-container">
+                        <img id="preview-profile-pic" src="https://via.placeholder.com/150" alt="Photo de profil">
+                    </div>
+                    <div class="sidebar-section">
+                        <h2>Contact</h2>
+                        <div id="preview-contact"></div>
+                    </div>
+                    <div class="sidebar-section">
+                        <h2>Compétences</h2>
+                        <div id="preview-skills"></div>
+                    </div>
+                    <div class="sidebar-section">
+                        <h2>Centres d'intérêt</h2>
+                        <div id="preview-interests"></div>
+                    </div>
+                </div>
+
+                <!-- Colonne principale (droite) -->
+                <div class="cv-main">
+                    <div class="main-header">
+                        <h1 id="preview-nom">Votre Nom</h1>
+                        <p id="preview-titre">Votre Titre</p>
+                    </div>
+                    <div class="main-section" id="preview-experience-section"><h2>Expérience</h2><div id="preview-experience"></div></div>
+                    <div class="main-section" id="preview-formation-section"><h2>Formation</h2><div id="preview-formation"></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Écran de chargement pour l'export PDF -->
+    <div id="loading-overlay">...</div>
+
+    <!-- Inclusion de la librairie html2pdf.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Inclusion de votre script JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>

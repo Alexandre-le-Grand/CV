@@ -1,0 +1,62 @@
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <!-- Colonne pour le formulaire de la lettre -->
+        <div class="form-section">
+            <h1>Créez votre Lettre de Motivation</h1>
+            <form id="letter-form">
+                <h2>Vos Informations (Expéditeur)</h2>
+                <textarea id="letter-sender" rows="4" placeholder="Votre Nom&#10;Votre Adresse&#10;Votre Téléphone&#10;Votre Email"></textarea>
+
+                <h2>Destinataire</h2>
+                <textarea id="letter-recipient" rows="4" placeholder="Nom de l'entreprise&#10;À l'attention de [Nom du contact]&#10;Adresse de l'entreprise"></textarea>
+
+                <h2>Détails</h2>
+                <input type="text" id="letter-place-date" placeholder="Lieu, le JJ/MM/AAAA">
+                <input type="text" id="letter-subject" placeholder="Objet : Candidature au poste de...">
+
+                <h2>Corps de la lettre</h2>
+                <textarea id="letter-body" rows="15" placeholder="Madame, Monsieur, ..."></textarea>
+
+                <h2>Conclusion</h2>
+                <input type="text" id="letter-closing" placeholder="Formule de politesse (ex: Veuillez agréer...)">
+                <input type="text" id="letter-signature" placeholder="Votre Nom (Signature)">
+            </form>
+            <button id="export-letter-pdf" class="export-button">Exporter en PDF</button>
+        </div>
+
+        <!-- Colonne pour l'aperçu de la lettre -->
+        <div class="preview-section">
+            <div class="preview-scroll-container">
+                <div id="letter-preview">
+                    <div class="letter-header">
+                        <div id="preview-letter-sender"></div>
+                        <div class="letter-recipient-block">
+                            <div id="preview-letter-recipient"></div>
+                            <div id="preview-letter-place-date"></div>
+                        </div>
+                    </div>
+                    <h2 id="preview-letter-subject"></h2>
+                    <div id="preview-letter-body"></div>
+                    <div class="letter-footer">
+                        <div id="preview-letter-closing"></div>
+                        <div id="preview-letter-signature"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Écran de chargement pour l'export PDF -->
+    <div id="loading-overlay">...</div>
+
+    <!-- Inclusion de la librairie html2pdf.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <!-- Inclusion de votre script JavaScript -->
+    <script src="lettre.js"></script>
+</body>
+</html>
+
